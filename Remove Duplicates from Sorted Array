@@ -17,10 +17,6 @@ public:
                     nums[i+1] = -200;
                 }
                 
-                if(nums[i] == -200 && nums[i+1] == -200) {
-                    break;
-                }
-                
                 for(j = 0; j < i; j++) {
                     if(nums[i] == nums[j]) {
                         //Changing the number to one that does not exist in our data

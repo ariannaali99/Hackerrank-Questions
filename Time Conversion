@@ -1,0 +1,59 @@
+import math
+import os
+import random
+import re
+import sys
+
+def timeConversion(s):
+    print(s)
+    
+    #get length of string 
+    length = len(s)-1
+    time = '\0'
+    #am or pm will be the last two chars
+    if(s[length-1] == 'A'):
+        hour = s[0:2]
+        if(hour == '12'):
+            time = '00' + s[2:length-1]
+        else:
+            time = s[0:length-1]
+    else:
+        #it is PM
+        hour = s[0:2]
+        if(hour == '01'):
+            time = '13' + s[2:length-1]
+        elif(hour == '02'):
+            time = '14' + s[2:length-1]
+        elif(hour == '03'):
+            time = '15' + s[2:length-1]
+        elif(hour == '04'):
+            time = '16' + s[2:length-1]
+        elif(hour == '05'):
+            time = '17' + s[2:length-2]
+        elif(hour == '06'):
+            time = '18' + s[2:length-2]
+        elif(hour == '07'):
+            time = '19' + s[2:length-1]
+        elif(hour == '08'):
+            time = '20' + s[2:length-1]
+        elif(hour == '09'):
+            time = '21' + s[2:length-1]
+        elif(hour == '10'):
+            time = '22' + s[2:length-1]
+        elif(hour == '11'):
+            time = '23' + s[2:length-1]
+        elif(hour == '12'):
+            time = '12' + s[2:length-1]
+    return time
+#end function 
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = timeConversion(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()

@@ -1,0 +1,66 @@
+import math
+import os
+import random
+import re
+import sys
+
+def lonelyinteger(a):
+    
+    #checking constraints
+    if(len(a) < 1 or len(a) >= 100):
+        print("Invalid Length of Array")
+        return 
+    
+    length = 0
+    if(len(a) == 1):
+        length = 1
+    else:
+        length = len(a)
+        
+    a.sort()
+    isPair = 0
+    unique = 0
+    
+    for i in range(length):
+        print(i)
+        
+        #edge case where length = 1
+        if(length == 1):
+            unique = a[i]
+            break
+        
+        #checking that all numbers are in range
+        if((a[i] < 0 or a[i] > 100) and (a[i+1] < 0 or a[i+1] > 100)):
+            print("Invalid Elements")
+            return 
+        
+        if(isPair == 1):
+            isPair = 0
+            continue
+        
+        #if all numbers but one are repeated then we can check using a pair
+        if(i == length-1):
+            unique = a[i]
+            break
+        else:
+            if(a[i] != a[i+1]):
+                unique = a[i]
+                break
+            else:
+                isPair = 1
+    return unique   
+    #end for loop
+#end of function
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    a = list(map(int, input().rstrip().split()))
+
+    result = lonelyinteger(a)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

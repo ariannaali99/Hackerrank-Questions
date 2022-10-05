@@ -1,0 +1,39 @@
+import math
+import os
+import random
+import re
+import sys
+
+def miniMaxSum(arr):
+    #sort the array
+    arr.sort()
+    length = len(arr)-1
+    
+    minSum = 0
+    maxSum = 0
+    
+    if(length < 4):
+        print("Invalid array size")
+        return
+    
+    #checking conditions
+    if(arr[0] < 1 or arr[length] > 1000000000):
+        print("Invalid element detected")
+        return 
+    
+    #for loop to add four integers
+    for i in range(4):
+        #add from the front for min 
+        minSum += arr[i]
+        
+        #add from back for max
+        maxSum += arr[length-i]
+        
+    print(minSum,maxSum)
+#end function
+
+if __name__ == '__main__':
+
+    arr = list(map(int, input().rstrip().split()))
+
+    miniMaxSum(arr)

@@ -1,0 +1,48 @@
+import math
+import os
+import random
+import re
+import sys
+
+def countingValleys(steps, path):
+    #since we are at sea level, we can set height to 0
+    height = 0
+    
+    #initializing variables 
+    result = 0
+    valley_start = 0
+    
+    #a valley begins beneath sea level and ends above sea level
+    for i in range(steps):
+
+        if(path[i] == 'D'):
+            height -= 1
+        
+        elif(path[i] == 'U'):
+            height += 1
+        
+        #valley begins with a step below sea level, hence height will be -1
+        if(height == -1 and valley_start == 0):
+            valley_start = 1
+        
+        #valley ends with a step up to sea level, hence height will be 0
+        elif(height == 0 and valley_start == 1):
+            result += 1
+            valley_start = 0
+        
+    #end for loop
+    return result
+#end function
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    steps = int(input().strip())
+
+    path = input()
+
+    result = countingValleys(steps, path)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

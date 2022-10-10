@@ -1,5 +1,3 @@
-#!/bin/python3
-
 import math
 import os
 import random
@@ -7,38 +5,46 @@ import re
 import sys
 
 #
-# Complete the 'plusMinus' function below.
+# Complete the 'diagonalDifference' function below.
 #
-# The function accepts INTEGER_ARRAY arr as parameter.
+# The function is expected to return an INTEGER.
+# The function accepts 2D_INTEGER_ARRAY arr as parameter.
 #
 
-def plusMinus(arr):
-    length = len(arr)
-    positive = 0
-    negative = 0
-    zero = 0
+def diagonalDifference(arr):
+    rows = len(arr)
+    columns = len(arr[0])
+    rightToLeft = 0
+    leftToRight = 0
     
-    for i in range(length):
-        if(arr[i] < 0):
-            negative += 1
-        elif(arr[i] == 0):
-            zero += 1
-        else:
-            positive += 1
-    
-    #get ratio
-    positive = positive/length
-    negative = negative/length
-    zero = zero/length
-    
-    print(positive)
-    print(negative)
-    print(zero)
+    if(rows == columns):
+        for i in range(rows):
+            if(arr[i][i] < -100 or arr[i][i] > 100):
+                return
+            
+            else:
+                #print(arr[i][i])
+                #print(arr[rows-i-1][i])
+                rightToLeft += arr[i][i]
+                leftToRight += arr[rows-i-1][i]
+        #end for loop
+    #absolute value
+    result = abs(rightToLeft - leftToRight)
+    return result
 #end function
 
 if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
     n = int(input().strip())
 
-    arr = list(map(int, input().rstrip().split()))
+    arr = []
 
-    plusMinus(arr)
+    for _ in range(n):
+        arr.append(list(map(int, input().rstrip().split())))
+
+    result = diagonalDifference(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

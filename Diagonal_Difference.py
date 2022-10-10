@@ -1,42 +1,44 @@
+#!/bin/python3
+
 import math
 import os
 import random
 import re
 import sys
 
-def diagonalDifference(arr):
-    #get number of rows
-    rows = len(arr)
+#
+# Complete the 'plusMinus' function below.
+#
+# The function accepts INTEGER_ARRAY arr as parameter.
+#
+
+def plusMinus(arr):
+    length = len(arr)
+    positive = 0
+    negative = 0
+    zero = 0
     
-    #initializing varibles
-    leftright = 0
-    rightleft = 0
-    result = 0
+    for i in range(length):
+        if(arr[i] < 0):
+            negative += 1
+        elif(arr[i] == 0):
+            zero += 1
+        else:
+            positive += 1
     
-    for i in range(rows):
-        leftright += arr[i][i]
-        rightleft += arr[i][rows-i-1]
-        print(leftright)
-        print(rightleft)
-    #end for loop
+    #get ratio
+    positive = positive/length
+    negative = negative/length
+    zero = zero/length
     
-    #get abs difference
-    result = abs(leftright - rightleft)
-    return result
+    print(positive)
+    print(negative)
+    print(zero)
 #end function
 
 if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
     n = int(input().strip())
 
-    arr = []
+    arr = list(map(int, input().rstrip().split()))
 
-    for _ in range(n):
-        arr.append(list(map(int, input().rstrip().split())))
-
-    result = diagonalDifference(arr)
-
-    fptr.write(str(result) + '\n')
-
-    fptr.close()
+    plusMinus(arr)
